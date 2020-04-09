@@ -1918,18 +1918,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     itemTitle: String,
-    itemContent: String,
-    price: Number
+    itemDescription: String
   }
 });
 
@@ -1992,53 +1984,11 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.loading = true;
-    setTimeout(function () {
-      _this.bookables = [{
-        title: "Hotel",
-        content: "This is awesome hotels room",
-        price: 15
-      }, {
-        title: "Exclusive Villa",
-        content: "Very expensive Villa",
-        price: 20
-      }, {
-        title: "Cheap Room",
-        content: "The cheapest place ever",
-        price: 1
-      }, {
-        title: "Nice apartment",
-        content: "Nice and clean apartment in the country",
-        price: 9
-      }, {
-        title: "Hotel",
-        content: "This is awesome hotels room",
-        price: 15
-      }, {
-        title: "Exclusive Villa",
-        content: "Very expensive Villa",
-        price: 20
-      }, {
-        title: "Cheap Room",
-        content: "The cheapest place ever",
-        price: 1
-      }, {
-        title: "Nice apartment",
-        content: "Nice and clean apartment in the country",
-        price: 9
-      }, {
-        title: "Exclusive Villa",
-        content: "Very expensive Villa",
-        price: 20
-      }, {
-        title: "Cheap Room",
-        content: "The cheapest place ever",
-        price: 1
-      }];
+    var request = axios.get("/api/bookables").then(function (response) {
+      _this.bookables = response.data;
       _this.loading = false;
-    }, 2000);
-  },
-  mounted: function mounted() {
-    console.log("Home  mounted.");
+    });
+    console.log(request);
   }
 });
 
@@ -37498,20 +37448,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card m-2" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h1", [_vm._v(_vm._s(_vm.itemTitle))])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-text" }, [
-          _c("p", [_vm._v(_vm._s(_vm.itemContent))])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-text" }, [
-          _c("h4", [_vm._v("Price: " + _vm._s(_vm.price) + " $")])
-        ])
+  return _c("div", { staticClass: "card w-100" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.itemTitle))]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-text" }, [
+        _vm._v(_vm._s(_vm.itemDescription))
       ])
     ])
   ])
@@ -37547,18 +37489,20 @@ var render = function() {
       _vm._l(_vm.rows, function(row) {
         return _c(
           "div",
-          { key: "row" + row, staticClass: "row" },
+          { key: "row" + row, staticClass: "row mb-4" },
           [
             _vm._l(_vm.bookablesInRow(row), function(bookable, column) {
               return _c(
                 "div",
-                { key: "row" + row + column, staticClass: "col" },
+                {
+                  key: "row" + row + column,
+                  staticClass: "col d-flex align-items-stretch bk-light"
+                },
                 [
                   _c("bookable-list-item", {
                     attrs: {
                       "item-title": bookable.title,
-                      "item-content": bookable.content,
-                      price: bookable.price
+                      "item-description": bookable.description
                     }
                   })
                 ],
