@@ -12,17 +12,21 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mt-3">
       <div class="card">
         <div class="card-title">
-          <h2 class="p-2">availability & prices</h2>
+          <availability></availability>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Availability from "./Availability";
 export default {
+  components: {
+    Availability
+  },
   data() {
     return {
       bookable: null,
