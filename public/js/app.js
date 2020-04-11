@@ -1955,12 +1955,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    bookableId: String
+  },
   data: function data() {
     return {
       from: null,
       to: null,
-      loading: null,
+      loading: false,
       status: null,
       errors: null
     };
@@ -1971,7 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.errors = null;
-      axios.get("/api/bookables/".concat(this.$route.params.id, "/availability?from=").concat(this.from, "&to=").concat(this.to)).then(function (response) {
+      axios.get("/api/bookables/".concat(this.bookableId, "/availability?from=").concat(this.from, "&to=").concat(this.to)).then(function (response) {
         _this.status = response.status;
       })["catch"](function (error) {
         if (422 === error.response.status) {
@@ -2012,7 +2018,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Availability__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Availability */ "./resources/js/bookable/Availability.vue");
-//
+/* harmony import */ var _ReviewList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReviewList */ "./resources/js/bookable/ReviewList.vue");
 //
 //
 //
@@ -2036,9 +2042,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Availability: _Availability__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Availability: _Availability__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ReviewList: _ReviewList__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -2053,6 +2061,65 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/api/bookables/".concat(this.$route.params.id)).then(function (response) {
       _this.bookable = response.data;
       _this.loading = false;
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/bookable/ReviewList.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/bookable/ReviewList.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    bookableId: String
+  },
+  data: function data() {
+    return {
+      loading: false,
+      reviews: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.loading = true;
+    axios.get("/api/bookables/".concat(this.bookableId, "/reviews")).then(function (response) {
+      return _this.reviews = response.data;
+    }).then(function () {
+      return _this.loading = false;
     });
   }
 });
@@ -6732,7 +6799,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nlabel[data-v-39d99139] {\r\n  font-size: 0.7rem;\r\n  text-transform: uppercase;\r\n  color: rgb(92, 3, 3);\r\n  font-weight: bolder;\n}\n.is-invalid[data-v-39d99139] {\r\n  border-color: #83281c;\r\n  background-image: none;\n}\n.invalid-feedback[data-v-39d99139] {\r\n  color: #83281c;\n}\r\n", ""]);
+exports.push([module.i, "\nlabel[data-v-39d99139] {\r\n  font-size: 0.7rem;\r\n  text-transform: uppercase;\r\n  color: gray;\r\n  font-weight: bolder;\n}\n.is-invalid[data-v-39d99139] {\r\n  border-color: #b22222;\r\n  background-image: none;\n}\n.invalid-feedback[data-v-39d99139] {\r\n  color: #b22222;\n}\r\n", ""]);
 
 // exports
 
@@ -38257,10 +38324,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-2" }, [
+  return _c("div", [
     _c(
-      "h6",
-      { staticClass: "text-uppercase text-secondary font-weight-bolder" },
+      "h5",
+      { staticClass: "text-uppercase text-secondary font-weight-bolder pl-2" },
       [
         _vm._v("\n    Check Availability\n    "),
         _vm.noAvailability
@@ -38275,115 +38342,117 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "form-row" }, [
-      _c(
-        "div",
-        { staticClass: "form-group col-md-6" },
-        [
-          _c("label", { attrs: { for: "from" } }, [_vm._v("From")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.from,
-                expression: "from"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            class: [{ "is-invalid": this.errorFor("from") }],
-            attrs: { type: "text", name: "from", placeholder: "Start date" },
-            domProps: { value: _vm.from },
-            on: {
-              keyup: function($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
+    _c("div", { staticClass: "card p-2" }, [
+      _c("div", { staticClass: "form-row" }, [
+        _c(
+          "div",
+          { staticClass: "form-group col-md-6" },
+          [
+            _c("label", { attrs: { for: "from" } }, [_vm._v("From")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.from,
+                  expression: "from"
                 }
-                return _vm.check($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              ],
+              staticClass: "form-control form-control-sm",
+              class: [{ "is-invalid": this.errorFor("from") }],
+              attrs: { type: "text", name: "from", placeholder: "Start date" },
+              domProps: { value: _vm.from },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.check($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.from = $event.target.value
                 }
-                _vm.from = $event.target.value
               }
-            }
-          }),
-          _vm._v(" "),
-          _vm._l(this.errorFor("from"), function(error, index) {
-            return _c(
-              "div",
-              { key: "from" + index, staticClass: "invalid-feedback" },
-              [_vm._v(_vm._s(error))]
-            )
-          })
-        ],
-        2
-      ),
+            }),
+            _vm._v(" "),
+            _vm._l(this.errorFor("from"), function(error, index) {
+              return _c(
+                "div",
+                { key: "from" + index, staticClass: "invalid-feedback" },
+                [_vm._v(_vm._s(error))]
+              )
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group col-md-6" },
+          [
+            _c("label", { attrs: { for: "to" } }, [_vm._v("To")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.to,
+                  expression: "to"
+                }
+              ],
+              staticClass: "form-control form-control-sm",
+              class: [{ "is-invalid": this.errorFor("to") }],
+              attrs: { type: "text", name: "to", placeholder: "End date" },
+              domProps: { value: _vm.to },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.check($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.to = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm._l(this.errorFor("to"), function(error, index) {
+              return _c(
+                "div",
+                { key: "to" + index, staticClass: "invalid-feedback" },
+                [_vm._v(_vm._s(error))]
+              )
+            })
+          ],
+          2
+        )
+      ]),
       _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "form-group col-md-6" },
-        [
-          _c("label", { attrs: { for: "to" } }, [_vm._v("To")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.to,
-                expression: "to"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            class: [{ "is-invalid": this.errorFor("to") }],
-            attrs: { type: "text", name: "to", placeholder: "End date" },
-            domProps: { value: _vm.to },
-            on: {
-              keyup: function($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.check($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.to = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._l(this.errorFor("to"), function(error, index) {
-            return _c(
-              "div",
-              { key: "to" + index, staticClass: "invalid-feedback" },
-              [_vm._v(_vm._s(error))]
-            )
-          })
-        ],
-        2
+        "button",
+        {
+          staticClass: "btn btn-secondary btn-block",
+          attrs: { disabled: _vm.loading },
+          on: { click: _vm.check }
+        },
+        [_vm._v("Check!")]
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-secondary btn-block",
-        attrs: { disabled: _vm.loading },
-        on: { click: _vm.check }
-      },
-      [_vm._v("Check")]
-    )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -38409,27 +38478,109 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-8" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          !_vm.loading
-            ? _c("div", [
-                _c("h2", [_vm._v(_vm._s(_vm.bookable.title))]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("article", [_vm._v(_vm._s(_vm.bookable.description))])
-              ])
-            : _c("div", [_vm._v("Loading.......")])
-        ])
-      ])
-    ]),
+    _c(
+      "div",
+      { staticClass: "col-md-8 pb-4" },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            !_vm.loading
+              ? _c("div", [
+                  _c("h2", [_vm._v(_vm._s(_vm.bookable.title))]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("article", [_vm._v(_vm._s(_vm.bookable.description))])
+                ])
+              : _c("div", [_vm._v("Loading...")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("review-list", { attrs: { "bookable-id": this.$route.params.id } })
+      ],
+      1
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-4 mt-3" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-title" }, [_c("availability")], 1)
-      ])
-    ])
+    _c(
+      "div",
+      { staticClass: "col-md-4 pb-4" },
+      [_c("availability", { attrs: { "bookable-id": this.$route.params.id } })],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/bookable/ReviewList.vue?vue&type=template&id=62084ff4&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/bookable/ReviewList.vue?vue&type=template&id=62084ff4& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "h5",
+      {
+        staticClass:
+          "text-uppercase text-secondary font-weight-bolder pl-2 pt-4"
+      },
+      [_vm._v("Review List")]
+    ),
+    _vm._v(" "),
+    _vm.loading
+      ? _c("div", [_vm._v("Loading...")])
+      : _c(
+          "div",
+          _vm._l(_vm.reviews, function(review, index) {
+            return _c(
+              "div",
+              {
+                key: index,
+                staticClass: "card px-4 my-1 border-bottom d-none d-md-block"
+              },
+              [
+                _c("div", { staticClass: "row pt-4" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _vm._v("Andrzej Rumak")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-6 d-flex justify-content-end" },
+                    [_vm._v(_vm._s(review.rating))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _vm._v(_vm._s(review.created_at))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row pt-4 pb-4" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _vm._v(_vm._s(review.content))
+                  ])
+                ])
+              ]
+            )
+          }),
+          0
+        )
   ])
 }
 var staticRenderFns = []
@@ -53930,6 +54081,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookable_vue_vue_type_template_id_0d2ee2be___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookable_vue_vue_type_template_id_0d2ee2be___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/bookable/ReviewList.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/bookable/ReviewList.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReviewList_vue_vue_type_template_id_62084ff4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReviewList.vue?vue&type=template&id=62084ff4& */ "./resources/js/bookable/ReviewList.vue?vue&type=template&id=62084ff4&");
+/* harmony import */ var _ReviewList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReviewList.vue?vue&type=script&lang=js& */ "./resources/js/bookable/ReviewList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ReviewList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReviewList_vue_vue_type_template_id_62084ff4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReviewList_vue_vue_type_template_id_62084ff4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/bookable/ReviewList.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/bookable/ReviewList.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/bookable/ReviewList.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ReviewList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/bookable/ReviewList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/bookable/ReviewList.vue?vue&type=template&id=62084ff4&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/bookable/ReviewList.vue?vue&type=template&id=62084ff4& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_template_id_62084ff4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReviewList.vue?vue&type=template&id=62084ff4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/bookable/ReviewList.vue?vue&type=template&id=62084ff4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_template_id_62084ff4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_template_id_62084ff4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
