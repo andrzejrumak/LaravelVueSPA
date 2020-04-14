@@ -2,6 +2,7 @@ import VueRouter from "vue-router";
 import Bookable from "./bookable/Bookable.vue";
 import Bookables from "./bookables/Bookables.vue";
 import Ex2 from "./components/Ex2.vue";
+import Review from "./review/Review.vue";
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
         path: "/second",
         component: Ex2,
         name: "second"
+    },
+    {
+        path: "/review/:id",
+        component: Review,
+        name: "review"
     }
 ];
 const router = new VueRouter({
