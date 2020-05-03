@@ -10,6 +10,7 @@ import StarRating from "./shared/components/StarRating.vue";
 import FatalError from "./shared/components/FatalError.vue";
 import Success from "./shared/components/Success.vue";
 import ValidationErrors from "./shared/components/ValidationErrors.vue";
+import storeDef from "./store";
 
 window.Vue = require("vue");
 Vue.use(VueRouter);
@@ -20,9 +21,11 @@ Vue.component("fatal-error", FatalError);
 Vue.component("success", Success);
 Vue.component("v-errors", ValidationErrors);
 
+const store = new Vuex.Store(storeDef);
 const app = new Vue({
     el: "#app",
     router,
+    store,
     components: {
         index: Index
     }

@@ -1964,6 +1964,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1973,8 +1981,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      from: null,
-      to: null,
+      from: this.$store.state.lastSearch.from,
+      to: this.$store.state.lastSearch.to,
       loading: false,
       status: null
     };
@@ -1985,6 +1993,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.errors = null;
+      this.$store.commit("setLastSearch", {
+        from: this.from,
+        to: this.to
+      });
       axios.get("/api/bookables/".concat(this.bookableId, "/availability?from=").concat(this.from, "&to=").concat(this.to)).then(function (response) {
         _this.status = response.status;
       })["catch"](function (error) {
@@ -7098,7 +7110,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nlabel[data-v-39d99139] {\r\n  font-size: 0.7rem;\r\n  text-transform: uppercase;\r\n  color: gray;\r\n  font-weight: bolder;\n}\n.is-invalid[data-v-39d99139] {\r\n  border-color: #b22222;\r\n  background-image: none;\n}\n.invalid-feedback[data-v-39d99139] {\r\n  color: #b22222;\n}\r\n", ""]);
+exports.push([module.i, "\nlabel[data-v-39d99139] {\r\n    font-size: 0.7rem;\r\n    text-transform: uppercase;\r\n    color: gray;\r\n    font-weight: bolder;\n}\n.is-invalid[data-v-39d99139] {\r\n    border-color: #b22222;\r\n    background-image: none;\n}\n.invalid-feedback[data-v-39d99139] {\r\n    color: #b22222;\n}\r\n", ""]);
 
 // exports
 
@@ -57126,7 +57138,7 @@ var render = function() {
       "h5",
       { staticClass: "text-uppercase text-secondary font-weight-bolder pl-2" },
       [
-        _vm._v("\n    Check Availability\n    "),
+        _vm._v("\n        Check Availability\n        "),
         _vm.noAvailability
           ? _c("span", { staticClass: "text-danger" }, [
               _vm._v("(NOT AVAILABLE)")
@@ -57235,7 +57247,7 @@ var render = function() {
           attrs: { disabled: _vm.loading },
           on: { click: _vm.check }
         },
-        [_vm._v("Check!")]
+        [_vm._v("\n            Check!\n        ")]
       )
     ])
   ])
@@ -74159,7 +74171,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_components_FatalError_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/components/FatalError.vue */ "./resources/js/shared/components/FatalError.vue");
 /* harmony import */ var _shared_components_Success_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/components/Success.vue */ "./resources/js/shared/components/Success.vue");
 /* harmony import */ var _shared_components_ValidationErrors_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/components/ValidationErrors.vue */ "./resources/js/shared/components/ValidationErrors.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 
@@ -74180,9 +74194,11 @@ Vue.component("star-rating", _shared_components_StarRating_vue__WEBPACK_IMPORTED
 Vue.component("fatal-error", _shared_components_FatalError_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 Vue.component("success", _shared_components_Success_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 Vue.component("v-errors", _shared_components_ValidationErrors_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store(_store__WEBPACK_IMPORTED_MODULE_9__["default"]);
 var app = new Vue({
   el: "#app",
   router: _routes__WEBPACK_IMPORTED_MODULE_1__["default"],
+  store: store,
   components: {
     index: _Index__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
@@ -75144,6 +75160,31 @@ var is422 = function is422(err) {
 var isErrorWithResponseAndStatus = function isErrorWithResponseAndStatus(err) {
   return err.response && err.response.status;
 };
+
+/***/ }),
+
+/***/ "./resources/js/store.js":
+/*!*******************************!*\
+  !*** ./resources/js/store.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    lastSearch: {
+      from: null,
+      to: null
+    }
+  },
+  mutations: {
+    setLastSearch: function setLastSearch(state, payload) {
+      state.lastSearch = payload;
+    }
+  }
+});
 
 /***/ }),
 
