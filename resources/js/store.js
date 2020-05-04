@@ -14,6 +14,12 @@ export default {
         setLastSearch(contex, payload) {
             contex.commit("setLastSearch", payload);
             localStorage.setItem("lastSearch", JSON.stringify(payload));
+        },
+        loadStoredState(contex) {
+            const lastSearch = localStorage.getItem("lastSearch");
+            if (lastSearch) {
+                contex.commit("setLastSearch", JSON.parse(lastSearch));
+            }
         }
     }
 };
