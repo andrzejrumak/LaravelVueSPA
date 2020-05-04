@@ -2011,7 +2011,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7150,7 +7149,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nlabel[data-v-39d99139] {\r\n    font-size: 0.7rem;\r\n    text-transform: uppercase;\r\n    color: gray;\r\n    font-weight: bolder;\n}\n.is-invalid[data-v-39d99139] {\r\n    border-color: #b22222;\r\n    background-image: none;\n}\n.invalid-feedback[data-v-39d99139] {\r\n    color: #b22222;\n}\r\n", ""]);
+exports.push([module.i, "\nlabel[data-v-39d99139] {\r\n  font-size: 0.7rem;\r\n  text-transform: uppercase;\r\n  color: gray;\r\n  font-weight: bolder;\n}\n.is-invalid[data-v-39d99139] {\r\n  border-color: #b22222;\r\n  background-image: none;\n}\n.invalid-feedback[data-v-39d99139] {\r\n  color: #b22222;\n}\r\n", ""]);
 
 // exports
 
@@ -57178,17 +57177,22 @@ var render = function() {
       "h5",
       { staticClass: "text-uppercase text-secondary font-weight-bolder pl-2" },
       [
-        _vm._v("\n        Check Availability\n        "),
-        _vm.noAvailability
-          ? _c("span", { staticClass: "text-danger" }, [
-              _vm._v("(NOT AVAILABLE)")
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasAvailability
-          ? _c("span", { staticClass: "text-success" }, [_vm._v("(AVAILABLE)")])
-          : _vm._e()
-      ]
+        _vm._v("\n    Check Availability\n    "),
+        _c("transition", { attrs: { name: "fade" } }, [
+          _vm.noAvailability
+            ? _c("span", { staticClass: "text-danger" }, [
+                _vm._v("(NOT AVAILABLE)")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.hasAvailability
+            ? _c("span", { staticClass: "text-success" }, [
+                _vm._v("(AVAILABLE)")
+              ])
+            : _vm._e()
+        ])
+      ],
+      1
     ),
     _vm._v(" "),
     _c("div", { staticClass: "card p-2" }, [
@@ -57287,7 +57291,16 @@ var render = function() {
           attrs: { disabled: _vm.loading },
           on: { click: _vm.check }
         },
-        [_vm._v("\n            Check!\n        ")]
+        [
+          !_vm.loading ? _c("span", [_vm._v("Check!")]) : _vm._e(),
+          _vm._v(" "),
+          _vm.loading
+            ? _c("span", [
+                _c("i", { staticClass: "fas fa-circle-notch fa-spin" }),
+                _vm._v(" Checking....\n      ")
+              ])
+            : _vm._e()
+        ]
       )
     ])
   ])
