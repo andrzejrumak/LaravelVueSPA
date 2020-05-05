@@ -15,7 +15,7 @@
       <review-list :bookable-id="this.$route.params.id"></review-list>
     </div>
     <div class="col-md-4 pb-4">
-      <availability :bookable-id="this.$route.params.id"></availability>
+      <availability :bookable-id="this.$route.params.id" @availability="checkPrice($event)"></availability>
     </div>
   </div>
 </template>
@@ -23,6 +23,8 @@
 <script>
 import Availability from "./Availability";
 import ReviewList from "./ReviewList";
+import { mapState } from "vuex";
+
 export default {
   components: {
     Availability,
@@ -31,7 +33,8 @@ export default {
   data() {
     return {
       bookable: null,
-      loading: false
+      loading: false,
+      price: null
     };
   },
   created() {
@@ -40,6 +43,26 @@ export default {
       this.bookable = response.data;
       this.loading = false;
     });
+  },
+  computed: mapState({
+    lastSearch: "lastSearch"
+  }),
+  methods: {
+    async checkPrice(hasAvailability) {
+      if (!hasAvailability) {
+        this.price = null;
+        return;
+      }
+      try {
+        this.price = (
+          await axios.get(
+            `/api/bookables/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`
+          )
+        ).data;
+      } catch (err) {
+        this.price = null;
+      }
+    }
   }
 };
 </script>
