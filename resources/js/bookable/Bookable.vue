@@ -15,7 +15,17 @@
       <review-list :bookable-id="this.$route.params.id"></review-list>
     </div>
     <div class="col-md-4 pb-4">
-      <availability :bookable-id="this.$route.params.id" @availability="checkPrice($event)"></availability>
+      <availability
+        :bookable-id="this.$route.params.id"
+        @availability="checkPrice($event)"
+        class="mb-4"
+      ></availability>
+      <transition name="fade">
+        <price-breakdown v-if="price" :price="price"></price-breakdown>
+      </transition>
+      <transition name="fade">
+        <button class="btn btn-outline-secondary btn-block mt-2" v-if="price">Book now</button>
+      </transition>
     </div>
   </div>
 </template>
@@ -23,12 +33,14 @@
 <script>
 import Availability from "./Availability";
 import ReviewList from "./ReviewList";
+import PriceBreakdown from "./PriceBreakdown";
 import { mapState } from "vuex";
 
 export default {
   components: {
     Availability,
-    ReviewList
+    ReviewList,
+    PriceBreakdown
   },
   data() {
     return {
@@ -58,7 +70,7 @@ export default {
           await axios.get(
             `/api/bookables/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`
           )
-        ).data;
+        ).data.data;
       } catch (err) {
         this.price = null;
       }

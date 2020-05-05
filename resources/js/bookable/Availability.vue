@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h5 class="text-uppercase text-secondary font-weight-bolder pl-2">
-      Check Availability
-      <transition name="fade">
+    <transition name="fade">
+      <h5 class="text-uppercase text-secondary font-weight-bolder pl-2">
+        Check Availability
         <span v-if="noAvailability" class="text-danger">(NOT AVAILABLE)</span>
         <span v-if="hasAvailability" class="text-success">(AVAILABLE)</span>
-      </transition>
-    </h5>
+      </h5>
+    </transition>
     <div class="card p-2">
       <div class="form-row">
         <div class="form-group col-md-6">
