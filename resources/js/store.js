@@ -32,5 +32,8 @@ export default {
                 contex.commit("setLastSearch", JSON.parse(lastSearch));
             }
         }
+    },
+    getters: {
+        itemsInBasket: state => state.basket.items.length
     }
 };
