@@ -28,8 +28,18 @@
           class="btn btn-outline-secondary btn-block mt-2"
           v-if="price"
           @click="addToBasket"
+          :disabled="inBasketAlready"
         >Book now</button>
       </transition>
+      <button
+        class="btn btn-outline-danger btn-block mt-2"
+        v-if="inBasketAlready"
+        @click="removeFromBasket"
+      >Remove from the basket</button>
+      <div
+        v-if="inBasketAlready"
+        class="mt-4 text-muted warning"
+      >If want to change dates, remove items from basket</div>
     </div>
   </div>
 </template>
@@ -60,9 +70,17 @@ export default {
       this.loading = false;
     });
   },
-  computed: mapState({
-    lastSearch: "lastSearch"
-  }),
+  computed: {
+    ...mapState({
+      lastSearch: "lastSearch",
+      inBasketAlready() {
+        if (null === this.bookable) {
+          return false;
+        }
+        return this.$store.getters.inBasketAlready(this.bookable.id);
+      }
+    })
+  },
   methods: {
     async checkPrice(hasAvailability) {
       if (!hasAvailability) {
@@ -85,7 +103,16 @@ export default {
         prise: this.price,
         dates: this.lastSearch
       });
+    },
+    removeFromBasket() {
+      this.$store.commit("removeFromBasket", this.bookable.id);
     }
   }
 };
 </script>
+
+<style  scoped>
+.warning {
+  font-size: 0.75rem;
+}
+</style>
