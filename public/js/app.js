@@ -1996,6 +1996,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["itemsInBasket"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -7382,7 +7406,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh6.badge[data-v-9d55657e] {\r\n  font-size: 100%;\n}\r\n", ""]);
+exports.push([module.i, "\nh6.badge[data-v-9d55657e] {\r\n  font-size: 100%;\n}\na[data-v-9d55657e] {\r\n  color: black;\n}\r\n", ""]);
 
 // exports
 
@@ -57518,34 +57542,103 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 m-2" }, [_vm._v("Checkout form")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4" },
-        [
-          _c("div", { staticClass: "d-flex justify-content-between" }, [
-            _c(
-              "h6",
-              {
-                staticClass: "text-uppercase text-secondary font-weight-bolder"
-              },
-              [_vm._v("Your Cart")]
-            ),
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _c("h5", { staticClass: "card-title" }, [_vm._v("Checkout form")]),
             _vm._v(" "),
-            _c("h6", { staticClass: "badge badge-secondary text-uppercase" }, [
-              _vm.itemsInBasket
-                ? _c("span", [_vm._v("Items " + _vm._s(_vm.itemsInBasket))])
-                : _c("span", [_vm._v("Empty")])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.basket, function(item) {
-            return _c("div", { key: item.bookable.id })
-          })
-        ],
-        2
-      )
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c(
+                "h6",
+                {
+                  staticClass:
+                    "text-uppercase text-secondary font-weight-bolder"
+                },
+                [_vm._v("Your Cart")]
+              ),
+              _vm._v(" "),
+              _c(
+                "h6",
+                { staticClass: "badge badge-secondary text-uppercase" },
+                [
+                  _vm.itemsInBasket
+                    ? _c("span", [_vm._v("Items " + _vm._s(_vm.itemsInBasket))])
+                    : _c("span", [_vm._v("Empty")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.basket, function(item) {
+              return _c("div", { key: item.bookable.id }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "py-3 border-top d-flex justify-content-between"
+                  },
+                  [
+                    _c(
+                      "span",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "bookable",
+                                params: { id: item.bookable.id }
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(item.bookable.title))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "font-weight-bold" }, [
+                      _vm._v("$" + _vm._s(item.prise.total))
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer text-muted" }, [
+                  _c("div", { staticClass: "d-flex justify-content-between" }, [
+                    _c("span", { staticClass: "pr-3 py-2" }, [
+                      _vm._v("From: " + _vm._s(item.dates.from))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "p-2" }, [
+                      _vm._v("To: " + _vm._s(item.dates.to))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-2 text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-outline-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.$store.dispatch(
+                              "removeFromBasket",
+                              item.bookable.id
+                            )
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-trash-alt" })]
+                    )
+                  ])
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      ])
     ])
   ])
 }
