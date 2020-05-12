@@ -48,7 +48,7 @@
 import Availability from "./Availability";
 import ReviewList from "./ReviewList";
 import PriceBreakdown from "./PriceBreakdown";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -98,14 +98,14 @@ export default {
       }
     },
     addToBasket() {
-      this.$store.commit("addToBasket", {
+      this.$store.dispatch("addToBasket", {
         bookable: this.bookable,
         prise: this.price,
         dates: this.lastSearch
       });
     },
     removeFromBasket() {
-      this.$store.commit("removeFromBasket", this.bookable.id);
+      this.$store.dispatch("removeFromBasket", this.bookable.id);
     }
   }
 };

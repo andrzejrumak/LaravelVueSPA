@@ -6,7 +6,7 @@
         About
         <i class="fa fa-anchor" aria-hidden="true"></i>
       </router-link>
-      <router-link class="btn nav-button" :to="{ name: 'home'}">
+      <router-link :to="{ name: 'basket'}" class="btn nav-button">
         Basket
         <span v-if="itemsInBasket" class="badge badge-secondary">{{itemsInBasket}}</span>
       </router-link>
