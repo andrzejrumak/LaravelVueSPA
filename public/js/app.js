@@ -2020,6 +2020,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["itemsInBasket"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -57549,7 +57551,7 @@ var render = function() {
           [
             _c("h5", { staticClass: "card-title" }, [_vm._v("Checkout form")]),
             _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-between" }, [
+            _c("div", { staticClass: "d-flex justify-content-between mx-3" }, [
               _c(
                 "h6",
                 {
@@ -57561,82 +57563,91 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "h6",
-                { staticClass: "badge badge-secondary text-uppercase" },
+                { staticClass: "badge badge-secondary text-uppercase mx-3" },
                 [
                   _vm.itemsInBasket
                     ? _c("span", [_vm._v("Items " + _vm._s(_vm.itemsInBasket))])
-                    : _c("span", [_vm._v("Empty")])
+                    : _c("span", { staticClass: "px-2" }, [_vm._v("Empty")])
                 ]
               )
             ]),
             _vm._v(" "),
-            _vm._l(_vm.basket, function(item) {
-              return _c("div", { key: item.bookable.id }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "py-3 border-top d-flex justify-content-between"
-                  },
-                  [
-                    _c(
-                      "span",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            attrs: {
-                              to: {
-                                name: "bookable",
-                                params: { id: item.bookable.id }
+            _c(
+              "transition-group",
+              { attrs: { name: "fade" } },
+              _vm._l(_vm.basket, function(item) {
+                return _c("div", { key: item.bookable.id }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "py-3 border-top d-flex justify-content-between"
+                    },
+                    [
+                      _c(
+                        "span",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "bookable",
+                                  params: { id: item.bookable.id }
+                                }
                               }
-                            }
-                          },
-                          [_vm._v(_vm._s(item.bookable.title))]
-                        )
-                      ],
-                      1
+                            },
+                            [_vm._v(_vm._s(item.bookable.title))]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "font-weight-bold" }, [
+                        _vm._v("$" + _vm._s(item.prise.total))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-footer text-muted" }, [
+                    _c(
+                      "div",
+                      { staticClass: "d-flex justify-content-between" },
+                      [
+                        _c("span", { staticClass: "pr-3 py-2" }, [
+                          _vm._v("From: " + _vm._s(item.dates.from))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "p-2" }, [
+                          _vm._v("To: " + _vm._s(item.dates.to))
+                        ])
+                      ]
                     ),
                     _vm._v(" "),
-                    _c("span", { staticClass: "font-weight-bold" }, [
-                      _vm._v("$" + _vm._s(item.prise.total))
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer text-muted" }, [
-                  _c("div", { staticClass: "d-flex justify-content-between" }, [
-                    _c("span", { staticClass: "pr-3 py-2" }, [
-                      _vm._v("From: " + _vm._s(item.dates.from))
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "p-2" }, [
-                      _vm._v("To: " + _vm._s(item.dates.to))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "p-2 text-right" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-outline-danger",
-                        on: {
-                          click: function($event) {
-                            return _vm.$store.dispatch(
-                              "removeFromBasket",
-                              item.bookable.id
-                            )
+                    _c("div", { staticClass: "p-2 text-right" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm btn-outline-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.$store.dispatch(
+                                "removeFromBasket",
+                                item.bookable.id
+                              )
+                            }
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-trash-alt" })]
-                    )
+                        },
+                        [_c("i", { staticClass: "fas fa-trash-alt" })]
+                      )
+                    ])
                   ])
                 ])
-              ])
-            })
+              }),
+              0
+            )
           ],
-          2
+          1
         )
       ])
     ])
