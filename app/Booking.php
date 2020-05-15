@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Booking extends Model
 {
@@ -17,7 +17,12 @@ class Booking extends Model
 
     public function reviews()
     {
-        return $this->hasOne('Reviews::clas');
+        return $this->hasOne(Reviews::class);
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
     }
 
     public function scopeBetweenDates(Builder $query, $from, $to)
