@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-6 mr-2">
+      <div class="col-md-6 mr-2" v-if="itemsInBasket">
         <div class="card mb-2">
           <div class="card-body">
             <h6 class="text-uppercase text-secondary font-weight-bolder card-title">Checkout</h6>
@@ -57,6 +57,7 @@
                   <input type="text" class="form-control" name="zip" v-model="customer.zip" />
                 </div>
               </div>
+
               <hr />
               <div class="form-row">
                 <div class="col-md-12 form-group">
@@ -69,6 +70,11 @@
               </div>
             </form>
           </div>
+        </div>
+      </div>
+      <div class="col-md-8" v-else>
+        <div class="jumbotron jumbotron-fluid text-center">
+          <h1>Empty</h1>
         </div>
       </div>
       <div class="col-md-5">
@@ -154,6 +160,7 @@ export default {
             to: basketItem.dates.to
           }))
         });
+        this.$store.dispatch("clearBasket");
       } catch (err) {}
       this.loading = false;
     }
