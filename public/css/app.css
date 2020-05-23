@@ -6121,6 +6121,7 @@ section {
 }
 
 body {
+<<<<<<< HEAD
     margin: 0;
     font-family: "Nunito", sans-serif;
     font-size: 0.9rem;
@@ -6129,6 +6130,16 @@ body {
     color: #212529;
     text-align: left;
     background-color: #f0d9d9;
+=======
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #212529;
+  text-align: left;
+  background-color: #f8fafc;
+>>>>>>> 98e1e004a5e63fb935bf5f374a2c2e026a6b1e3e
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -6568,12 +6579,21 @@ mark,
 }
 
 .img-thumbnail {
+<<<<<<< HEAD
     padding: 0.25rem;
     background-color: #f0d9d9;
     border: 1px solid #dee2e6;
     border-radius: 0.25rem;
     max-width: 100%;
     height: auto;
+=======
+  padding: 0.25rem;
+  background-color: #f8fafc;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: auto;
+>>>>>>> 98e1e004a5e63fb935bf5f374a2c2e026a6b1e3e
 }
 
 .figure {
@@ -8046,6 +8066,7 @@ pre code {
     background-color: #f4b0af;
 }
 
+<<<<<<< HEAD
 .table-light,
 .table-light > th,
 .table-light > td {
@@ -8061,6 +8082,18 @@ pre code {
 
 .table-hover .table-light:hover {
     background-color: #ececf6;
+=======
+.custom-range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+}
+
+.custom-range:focus::-moz-range-thumb {
+  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+}
+
+.custom-range:focus::-ms-thumb {
+  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+>>>>>>> 98e1e004a5e63fb935bf5f374a2c2e026a6b1e3e
 }
 
 .table-hover .table-light:hover > td,
@@ -8249,9 +8282,17 @@ pre code {
     opacity: 1;
 }
 
+<<<<<<< HEAD
 .form-control::-moz-placeholder {
     color: #6c757d;
     opacity: 1;
+=======
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #f8fafc;
+  border-color: #dee2e6 #dee2e6 #f8fafc;
+>>>>>>> 98e1e004a5e63fb935bf5f374a2c2e026a6b1e3e
 }
 
 .form-control:-ms-input-placeholder {
@@ -17003,6 +17044,7 @@ a.text-dark:focus {
     }
 }
 
+<<<<<<< HEAD
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 1s;
@@ -17012,3 +17054,5 @@ a.text-dark:focus {
 .fade-leave-to {
     opacity: 0;
 }
+=======
+>>>>>>> 98e1e004a5e63fb935bf5f374a2c2e026a6b1e3e
