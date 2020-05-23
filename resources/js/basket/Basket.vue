@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="row">
+    <success v-if="success">Congratulations on your purhase</success>
+    <div class="row" v-else>
       <div class="col-md-6 mr-2" v-if="itemsInBasket">
         <div class="card mb-2">
           <div class="card-body">
@@ -175,8 +176,9 @@ export default {
   mixins: [validationErrors],
   data() {
     return {
+      loading: false,
+      bookingAttempted: false,
       customer: {
-        loading: false,
         first_names: null,
         last_name: null,
         email: null,
@@ -192,12 +194,16 @@ export default {
     ...mapGetters(["itemsInBasket"]),
     ...mapState({
       basket: state => state.basket.items
-    })
+    }),
+    success() {
+      return !this.loading && 0 === this.itemsInBasket && this.bookingAttempted;
+    }
   },
 
   methods: {
     async book() {
       this.loading = true;
+      this.bookingAttempted = false;
       this.errors = null;
       try {
         await axios.post(`/api/checkout`, {
@@ -213,6 +219,7 @@ export default {
         this.errors = error.response && error.response.data.errors;
       }
       this.loading = false;
+      this.bookingAttempted = true;
     }
   }
 };
