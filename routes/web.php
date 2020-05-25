@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user(); 
 });
 

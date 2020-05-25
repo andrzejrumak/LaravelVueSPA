@@ -11,6 +11,7 @@ import FatalError from "./shared/components/FatalError.vue";
 import Success from "./shared/components/Success.vue";
 import ValidationErrors from "./shared/components/ValidationErrors.vue";
 import storeDef from "./store";
+import Axios from "axios";
 
 window.Vue = require("vue");
 Vue.use(VueRouter);
@@ -29,7 +30,7 @@ const app = new Vue({
     components: {
         index: Index
     },
-    beforeCreate() {
+    async beforeCreate() {
         this.$store.dispatch("loadStoredState");
     }
 });
