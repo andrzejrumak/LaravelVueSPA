@@ -8,7 +8,9 @@ export default {
         },
         basket: {
             items: []
-        }
+        },
+        isLoggedIn: false,
+        user: {}
     },
     mutations: {
         setLastSearch(state, payload) {
@@ -47,6 +49,8 @@ export default {
             if (basket) {
                 contex.commit("setBasket", JSON.parse(basket));
             }
+
+            contex.commit("setLoggedIn", isLoggedIn());
         },
         addToBasket({ commit, state }, payload) {
             commit("addToBasket", payload);
@@ -67,7 +71,9 @@ export default {
                     commit("setUser", user);
                     commit("setLoggedIn", true);
                 } catch (error) {
-                    dispatch("logout");
+                    if (401 === error.response.status) {
+                        dispatch("logout");
+                    }
                 }
             }
         },
