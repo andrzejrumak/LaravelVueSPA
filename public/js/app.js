@@ -76367,6 +76367,15 @@ Vue.component("fatal-error", _shared_components_FatalError_vue__WEBPACK_IMPORTED
 Vue.component("success", _shared_components_Success_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 Vue.component("v-errors", _shared_components_ValidationErrors_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store(_store__WEBPACK_IMPORTED_MODULE_10__["default"]);
+window.axios.interceptor.respose.use(function (respose) {
+  return respose;
+}, function (error) {
+  if (401 === error.respose.status) {
+    store.dispatch("logout");
+  }
+
+  return Promise.reject(error);
+});
 var app = new Vue({
   el: "#app",
   router: _routes__WEBPACK_IMPORTED_MODULE_2__["default"],
