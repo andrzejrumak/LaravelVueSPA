@@ -1,3 +1,6 @@
+Booking app - LARAVEL backend and Vue js SPA front - made as a Udemy learning project - https://www.udemy.com/course/master-laravel-6-with-vuejs-fullstack-development/
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
